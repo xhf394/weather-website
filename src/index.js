@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 
+
 const CurrentLocation = () => {
     return (
         <div className="current-location">
@@ -33,12 +34,52 @@ class Header extends  React.Component {
     )
     }
 }
-class WeatherApp extends React.Component {
 
+class NextThreeDaysTemperature extends  React.Component {
+
+    render () {
+        return (
+            < div >
+            < p > "next three days temperature" < /p>
+            < /div>
+    )
+    }
+}
+class TodayTemperature extends React.Component {
+
+    render () {
+        return (
+            <div>
+              <p>"today's temperature "</p>
+            </div>
+        )
+    }
+}
+
+class Body extends React.Component {
+
+    render () {
+        return (
+            <div className="body">
+                <p>"this is body"</p>
+                <TodayTemperature />
+                <NextThreeDaysTemperature />
+            </div>
+        )
+    }
+}
+class WeatherApp extends React.Component {
+    constructor(props){
+        super (props);
+        this.state = {
+            
+        }
+    }
     render() {
         return (
             <div className="container">
             <Header />
+            <Body />
             </div>
         )
     }
