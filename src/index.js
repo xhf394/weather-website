@@ -4,10 +4,11 @@ import './index.css';
 
 
 
-const CurrentLocation = () => {
+const CurrentLocation = (props) => {
     return (
         <div className="current-location">
-            <p>Current Location</p>
+            <p>Current Location
+    {props.location}</p>
         </div>
     )
 }
@@ -17,7 +18,7 @@ const SearchBar = () => {
         <div className="search-bar">
         <form>
             <input type="text" placeholder="Search City" />
-            <button> Search </button>
+            <button > Search </button>
         </form>
         </div>
     )
@@ -28,7 +29,8 @@ class Header extends  React.Component {
     render() {
         return (
             <div className="header">
-                <CurrentLocation />
+                <CurrentLocation
+                 location={this.props.location}/>
                 <SearchBar />
             </div>
     )
@@ -72,9 +74,24 @@ class WeatherApp extends React.Component {
     constructor(props){
         super (props);
         this.state = {
-            
+            Lat: 'Loading',
+            Long: 'Loading'
         }
+        
+    getLocation (){
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    this.setState({
+                        Lat: position.coords.latitude,
+                        Long: position.coords.longitude,
+                    });
+
+                }
+            )
+        }    
     }
+
+    
     render() {
         return (
             <div className="container">
