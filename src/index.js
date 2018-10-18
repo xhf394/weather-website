@@ -85,7 +85,6 @@ class WeatherApp extends React.Component {
                         Lat: position.coords.latitude,
                         Long: position.coords.longitude,
                     });
-
                 }
             )
         }    
