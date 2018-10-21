@@ -15,21 +15,20 @@ class WeatherApp extends React.Component {
     constructor(props){
         super (props);
         this.state = {
-            Lat: 'Loading',
-            Long: 'Loading'
+                Lat: 'Loading',
+                Long: 'Loading'
         }
-
-
     }
+
     componentDidMount (){
         //const that = this;
         navigator.geolocation.getCurrentPosition(
             function (position) {
                 this.setState({
-                    Lat: position.coords.latitude,
-                    Long: position.coords.longitude,
+                        Lat: position.coords.latitude,
+                        Long: position.coords.longitude
                 });
-            },
+            }.bind(this),
             function (error) {
                 const errorTypes = {
                     1: '位置服务被拒绝',
@@ -40,7 +39,7 @@ class WeatherApp extends React.Component {
             },
             {timeout: 5000,
             maximumAge: 60*1000*2}
-        )
+        );
     }
     
     render() {
