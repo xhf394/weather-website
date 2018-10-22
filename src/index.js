@@ -8,7 +8,7 @@ import TodayTemperature from './Components/TodayTemperature';
 
 
 
-
+const API_KEY = "9b8ba16944f1b9eafdf4b5e434c3511a";
 
 
 class WeatherApp extends React.Component {
@@ -41,6 +41,15 @@ class WeatherApp extends React.Component {
             maximumAge: 60*1000*2}
         );
     }
+
+    getWeather = async (e) => {
+        e.preventDefault();
+        const Lat = this.state.Lat;
+        const Long = this.state.Long;
+        const api_call = await fetch(`https://samples.openweathermap.org/data/2.5/forecast?q=London,us&mode=xml&appid=b6907d289e10d714a6e88b30761fae22`);
+        const data = await api_call.json();
+        console.log(data);
+    }
     
     render() {
 
@@ -48,7 +57,10 @@ class WeatherApp extends React.Component {
             <div className="container">
                 <div className="header">
                     <CurrentLocation
-                        location={this.props.location}/>
+                        getweather={this.getWeather}
+                        lat = {this.state.Lat}
+                        long = {this.state.Long}
+                        />
                     <SearchBar />
                 </div>
             <div className="body">

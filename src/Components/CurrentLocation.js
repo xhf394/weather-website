@@ -4,10 +4,13 @@ import ReactDOM from 'react-dom';
 
 const CurrentLocation = (props) => {
     return (
-        <div className="current-location">
-        <p>Current Location
-    {props.location}</p>
-    </div>
+        <div className="current-location" style = {{color: 'red'}}>
+            <p>
+                Current Location <br/>
+                Latitude: {props.lat} <br />
+                Longitude: {props.long}
+            </p>
+         </div>
 )
 }
 
