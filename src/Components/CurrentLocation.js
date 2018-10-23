@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 
 
 const CurrentLocation = (props) => {
+
+
     return (
-        <div className="current-location" style = {{color: 'red'}}>
+        <div className="current-location" style = {{color: 'red'}} onLoad={props.getWeather}>
             <p>
-                Current Location <br/>
+                Current Location: {props.city} <br/>
                 Latitude: {props.lat} <br />
                 Longitude: {props.long}
             </p>

@@ -15,18 +15,40 @@ class WeatherApp extends React.Component {
     constructor(props){
         super (props);
         this.state = {
-                Lat: 'Loading',
-                Long: 'Loading'
+                lat: 'Loading',
+                long: 'Loading',
+                temperature: undefined,
+                city: "undefined",
+                country: undefined,
+                humidity: undefined,
+                description: undefined,
+                error: undefined
+
         }
     }
 
-    componentDidMount (){
+    componentDidMount () {
         //const that = this;
         navigator.geolocation.getCurrentPosition(
             function (position) {
+                const lat = position.coords.latitude;
+                const long = position.coords.longitude;
+
+
+                fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${API_KEY}`)
+                   .then(response => response.json())
+                    .then(data =>
+                        this.setState({
+                            city: data.name
+                        })
+                    );
+
+
+
+                //console.log(url);
                 this.setState({
-                        Lat: position.coords.latitude,
-                        Long: position.coords.longitude
+                    lat: lat,
+                    long: long,
                 });
             }.bind(this),
             function (error) {
@@ -37,19 +59,35 @@ class WeatherApp extends React.Component {
                 };
                 alert(errorTypes[error.code] + ": 不能确定你的当前地理位置");
             },
-            {timeout: 5000,
-            maximumAge: 60*1000*2}
+            {
+                timeout: 5000,
+                maximumAge: 60 * 1000 * 2
+            }
         );
+
+
+
+
+
     }
 
     getWeather = async (e) => {
         e.preventDefault();
-        const Lat = this.state.Lat;
-        const Long = this.state.Long;
-        const api_call = await fetch(`https://samples.openweathermap.org/data/2.5/forecast?q=London,us&mode=xml&appid=b6907d289e10d714a6e88b30761fae22`);
+        const lat = this.state.lat;
+        const long = this.state.long;
+        const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${API_KEY}`);
         const data = await api_call.json();
         console.log(data);
+        this.setState({
+            temperature: data.main.temp,
+            city: data.name,
+            country: data.sys.country,
+            humidity: data.main.humidity,
+            description: data.weather[0].description,
+            error:""
+        })
     }
+
     
     render() {
 
@@ -58,10 +96,13 @@ class WeatherApp extends React.Component {
                 <div className="header">
                     <CurrentLocation
                         getweather={this.getWeather}
-                        lat = {this.state.Lat}
-                        long = {this.state.Long}
+                        lat = {this.state.lat}
+                        long = {this.state.long}
+                        city = {this.state.city}
                         />
-                    <SearchBar />
+                    <SearchBar
+                     getweather = {this.getWeather}
+                    />
                 </div>
             <div className="body">
                 <p>"this is body"</p>
