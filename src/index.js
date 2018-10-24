@@ -22,6 +22,7 @@ class WeatherApp extends React.Component {
                 country: undefined,
                 humidity: undefined,
                 description: undefined,
+                icon: undefined,
                 error: undefined
 
         }
@@ -39,7 +40,13 @@ class WeatherApp extends React.Component {
                    .then(response => response.json())
                     .then(data =>
                         this.setState({
-                            city: data.name
+                            city: data.name,
+                            temperature: data.main.temp,
+                            country: data.sys.country,
+                            humidity: data.main.humidity,
+                            description: data.weather[0].description,
+                            icon: data.weather[0].icon,
+                            error:""
                         })
                     );
 
@@ -73,9 +80,11 @@ class WeatherApp extends React.Component {
 
     getWeather = async (e) => {
         e.preventDefault();
-        const lat = this.state.lat;
-        const long = this.state.long;
-        const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${API_KEY}`);
+        const city = e.target.elements.city.value;
+        const country = e.target.elements.country.value;
+        //const lat = this.state.lat;
+        //const long = this.state.long;
+        const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=${API_KEY}`);
         const data = await api_call.json();
         console.log(data);
         this.setState({
@@ -95,7 +104,6 @@ class WeatherApp extends React.Component {
             <div className="container">
                 <div className="header">
                     <CurrentLocation
-                        getweather={this.getWeather}
                         lat = {this.state.lat}
                         long = {this.state.long}
                         city = {this.state.city}
@@ -106,7 +114,13 @@ class WeatherApp extends React.Component {
                 </div>
             <div className="body">
                 <p>"this is body"</p>
-                <TodayTemperature />
+                <TodayTemperature
+                city = {this.state.city}
+                temperature = {this.state.temperature}
+                humidity = {this.state.humidity}
+                icon = {this.state.icon}
+                description = {this.state.description}
+                />
                 <NextThreeDaysTemperature />
             </div>
             </div>

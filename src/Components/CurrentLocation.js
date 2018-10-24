@@ -6,7 +6,7 @@ const CurrentLocation = (props) => {
 
 
     return (
-        <div className="current-location" style = {{color: 'red'}} onLoad={props.getWeather}>
+        <div className="current-location" style = {{color: 'red'}} >
             <p>
                 Current Location: {props.city} <br/>
                 Latitude: {props.lat} <br />
