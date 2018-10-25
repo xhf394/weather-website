@@ -8,7 +8,7 @@ const CurrentLocation = (props) => {
     return (
         <div className="current-location" style = {{color: 'red'}} >
             <p>
-                Current Location: {props.city} <br/>
+                Location: {props.city} <br/>
                 Latitude: {props.lat} <br />
                 Longitude: {props.long}
             </p>

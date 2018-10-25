@@ -88,10 +88,13 @@ class WeatherApp extends React.Component {
         const data = await api_call.json();
         console.log(data);
         this.setState({
+            lat: data.coord.lat,
+            long: data.coord.lon,
             temperature: data.main.temp,
             city: data.name,
             country: data.sys.country,
             humidity: data.main.humidity,
+            icon: data.weather[0].icon,
             description: data.weather[0].description,
             error:""
         })
