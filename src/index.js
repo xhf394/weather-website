@@ -23,7 +23,8 @@ class WeatherApp extends React.Component {
                 humidity: undefined,
                 description: undefined,
                 icon: undefined,
-                error: undefined
+                error: undefined,
+
 
         }
     }
@@ -51,7 +52,11 @@ class WeatherApp extends React.Component {
                     );
 
 
-
+                fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&APPID=${API_KEY}`)
+                   .then(response => response.json())
+                    .then(data =>
+                        console.log(data.list[5],data.list[6],data.list[7],data.list[8])
+                    );
                 //console.log(url);
                 this.setState({
                     lat: lat,
@@ -98,6 +103,15 @@ class WeatherApp extends React.Component {
             description: data.weather[0].description,
             error:""
         })
+    }
+
+    forcastWeather = async(e) =>{
+        e.preventDefault();
+        const city = this.state.city;
+        const country = this.state.country;    
+        const api_call = await fetch(`api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=${API_KEY}`);
+        const data = await api_call.json();
+        console.log(data);
     }
 
     
