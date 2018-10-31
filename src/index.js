@@ -24,8 +24,12 @@ class WeatherApp extends React.Component {
                 description: undefined,
                 icon: undefined,
                 error: undefined,
-
-
+                forcastweather: undefined,
+                nextOneDay: undefined,
+                nextTwoDay: undefined,
+                nextDay: [
+                        {nextDay: undefined}
+                ]
         }
     }
 
@@ -36,32 +40,40 @@ class WeatherApp extends React.Component {
                 const lat = position.coords.latitude;
                 const long = position.coords.longitude;
 
+                 this.setState({
+                    lat: lat,
+                    long: long,
+                });
 
-                fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${API_KEY}`)
+                fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&APPID=${API_KEY}`)
+                   .then(response => response.json())
+                    .then(data =>
+                         this.setState({
+                            forecastweather: data,
+                            nextTwoDay: data.list[16].main.temp
+                         })
+                    ); 
+
+                fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&APPID=${API_KEY}`)
                    .then(response => response.json())
                     .then(data =>
                         this.setState({
-                            city: data.name,
-                            temperature: data.main.temp,
-                            country: data.sys.country,
-                            humidity: data.main.humidity,
-                            description: data.weather[0].description,
-                            icon: data.weather[0].icon,
+                            city: data.city.name,
+                            temperature: data.list[1].main.temp,
+                            country: data.city.country,
+                            humidity: data.list[1].main.humidity,
+                            description: data.list[1].weather[0].description,
+                            icon: data.list[1].weather[0].icon,
+                            nextOneDay: data.list[8].main.temp,
+                            nextDay: [data.list],
                             error:""
                         })
                     );
 
 
-                fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&APPID=${API_KEY}`)
-                   .then(response => response.json())
-                    .then(data =>
-                        console.log(data.list[5],data.list[6],data.list[7],data.list[8])
-                    );
+                
                 //console.log(url);
-                this.setState({
-                    lat: lat,
-                    long: long,
-                });
+               
             }.bind(this),
             function (error) {
                 const errorTypes = {
@@ -114,6 +126,7 @@ class WeatherApp extends React.Component {
         console.log(data);
     }
 
+
     
     render() {
 
@@ -138,7 +151,14 @@ class WeatherApp extends React.Component {
                 icon = {this.state.icon}
                 description = {this.state.description}
                 />
-                <NextThreeDaysTemperature />
+                <NextThreeDaysTemperature
+                city = {this.state.city}
+                country = {this.state.country}
+                nextOneDay = {this.state.nextOneDay}
+                nextTwoDay = {this.state.nextTwoDay}
+                nextDay = {this.state.nextDay}
+
+                 />
             </div>
             </div>
         )
@@ -149,5 +169,4 @@ ReactDOM.render(<WeatherApp />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-
+// Learn more about service workers: http://bit.ly/CRA-PWA 
