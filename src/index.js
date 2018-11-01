@@ -25,11 +25,15 @@ class WeatherApp extends React.Component {
                 icon: undefined,
                 error: undefined,
                 forcastweather: undefined,
-                nextOneDay: undefined,
-                nextTwoDay: undefined,
-                nextDay: [
-                        {nextDay: undefined}
-                ]
+                nextOneDayTemp: undefined,
+                nextTwoDayTemp: undefined,
+                nextThreeDayTemp: undefined,
+                icon1: undefined,
+                icon2: undefined,
+                icon3:undefined,
+                // nextDay: [
+                //         {nextDay: undefined}
+                // ]
         }
     }
 
@@ -45,14 +49,14 @@ class WeatherApp extends React.Component {
                     long: long,
                 });
 
-                fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&APPID=${API_KEY}`)
-                   .then(response => response.json())
-                    .then(data =>
-                         this.setState({
-                            forecastweather: data,
-                            nextTwoDay: data.list[16].main.temp
-                         })
-                    ); 
+                // fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&APPID=${API_KEY}`)
+                //    .then(response => response.json())
+                //     .then(data =>
+                //          this.setState({
+                //             forecastweather: data,
+                            
+                //          })
+                //     ); 
 
                 fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&APPID=${API_KEY}`)
                    .then(response => response.json())
@@ -64,8 +68,13 @@ class WeatherApp extends React.Component {
                             humidity: data.list[1].main.humidity,
                             description: data.list[1].weather[0].description,
                             icon: data.list[1].weather[0].icon,
-                            nextOneDay: data.list[8].main.temp,
-                            nextDay: [data.list],
+                            nextOneDayTemp: data.list[8].main.temp,
+                            //nextDay: [data.list],
+                            nextTwoDayTemp: data.list[16].main.temp,
+                            nextThreeDayTemp: data.list[24].main.temp,
+                            icon1:data.list[8].weather[0].icon,
+                            icon2:data.list[16].weather[0].icon,
+                            icon3:data.list[24].weather[0].icon,    
                             error:""
                         })
                     );
@@ -116,19 +125,11 @@ class WeatherApp extends React.Component {
             error:""
         })
     }
-
-    forcastWeather = async(e) =>{
-        e.preventDefault();
-        const city = this.state.city;
-        const country = this.state.country;    
-        const api_call = await fetch(`api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=${API_KEY}`);
-        const data = await api_call.json();
-        console.log(data);
-    }
-
-
     
     render() {
+        const nextOneDay = getDate().nextOneDay;
+        const nextTwoDay = getDate().nextTwoDay;
+        const nextThreeDay = getDate().nextThreeDay;    
 
         return (
             <div className="container">
@@ -154,11 +155,17 @@ class WeatherApp extends React.Component {
                 <NextThreeDaysTemperature
                 city = {this.state.city}
                 country = {this.state.country}
-                nextOneDay = {this.state.nextOneDay}
-                nextTwoDay = {this.state.nextTwoDay}
-                nextDay = {this.state.nextDay}
-
+                nextOneDayTemp = {this.state.nextOneDayTemp}
+                nextTwoDayTemp = {this.state.nextTwoDayTemp}
+                nextThreeDayTemp = {this.state.nextThreeDayTemp}
+                nextOneDay = {nextOneDay}
+                nextTwoDay = {nextTwoDay}
+                nextThreeDay = {nextThreeDay}
+                icon1 = {this.state.icon1}
+                icon2 = {this.state.icon2}
+                icon3 = {this.state.icon3}
                  />
+                }
             </div>
             </div>
         )
@@ -170,3 +177,29 @@ ReactDOM.render(<WeatherApp />, document.getElementById('root'));
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA 
+function getDate(){
+            const myDate = new Date();                                      
+            // const weekdayCount = [{Sunday: 0}, {Monday: 1}, {Tuesday: 2}, {Wednesday: 3}, {Thursday: 4}, {Friday: 5}, {Saturday:6}];
+            const todayDateNumber = myDate.getDay();
+
+            const weekdayCount = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday","Monday","Tuesday"];
+            console.log(weekdayCount[0]);
+
+
+            let todayDate = "";
+            let nextOneDay = "";
+            let nextTwoDay = "";
+            let nextThreeDay = "";
+
+            for (let i = 0; i <= 6; i++){
+                if(todayDateNumber == i){
+                    todayDate = weekdayCount[i];
+                    nextOneDay = weekdayCount[i+1];
+                    nextTwoDay = weekdayCount[i+2];
+                    nextThreeDay = weekdayCount[i+3];   
+                }
+            }
+
+            console.log(todayDate, nextOneDay, nextTwoDay, nextThreeDay);
+            return {todayDate: todayDate, nextOneDay: nextOneDay, nextTwoDay: nextTwoDay, nextThreeDay: nextThreeDay}   
+        }

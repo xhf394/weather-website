@@ -15,7 +15,7 @@ class TodayTemperature extends React.Component {
             <div>
             "today's temperature " <br/>
             <div id="icon">
-                <img id="wicon" src={iconurl } alt="Weather icon" />
+                <img id="wicon" src={iconurl} alt="Weather icon" />
             </div>
              icon: {this.props.icon}<br />
              temperature: {this.props.temperature}<br />
