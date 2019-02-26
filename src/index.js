@@ -17,7 +17,7 @@ class WeatherApp extends React.Component {
         this.state = {
                 lat: 'Loading',
                 long: 'Loading',
-                temperature: undefined,
+                temperature: "",
                 city: "undefined",
                 country: undefined,
                 humidity: undefined,
@@ -25,9 +25,9 @@ class WeatherApp extends React.Component {
                 icon: undefined,
                 error: undefined,
                 forcastweather: undefined,
-                nextOneDayTemp: undefined,
-                nextTwoDayTemp: undefined,
-                nextThreeDayTemp: undefined,
+                nextOneDayTemp: null,
+                nextTwoDayTemp: null,
+                nextThreeDayTemp: null,
                 icon1: undefined,
                 icon2: undefined,
                 icon3:undefined,
@@ -48,15 +48,6 @@ class WeatherApp extends React.Component {
                     lat: lat,
                     long: long,
                 });
-
-                // fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&APPID=${API_KEY}`)
-                //    .then(response => response.json())
-                //     .then(data =>
-                //          this.setState({
-                //             forecastweather: data,
-                            
-                //          })
-                //     ); 
 
                 fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&APPID=${API_KEY}`)
                    .then(response => response.json())
@@ -112,7 +103,8 @@ class WeatherApp extends React.Component {
         //const long = this.state.long;
         const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=${API_KEY}`);
         const data = await api_call.json();
-        console.log(data);
+        if(city && country) {
+        	console.log(data);
         this.setState({
             lat: data.coord.lat,
             long: data.coord.lon,
@@ -124,12 +116,21 @@ class WeatherApp extends React.Component {
             description: data.weather[0].description,
             error:""
         })
+        }
     }
     
     render() {
         const nextOneDay = getDate().nextOneDay;
         const nextTwoDay = getDate().nextTwoDay;
-        const nextThreeDay = getDate().nextThreeDay;    
+        const nextThreeDay = getDate().nextThreeDay;
+        let temperature = convertTemp(this.state.temperature);
+        let nextOneDayTemp = convertTemp(this.state.nextOneDayTemp);
+        let nextTwoDayTemp = convertTemp(this.state.nextTwoDayTemp);
+        let nextThreeDayTemp = convertTemp(this.state.nextThreeDayTemp);   
+        
+        console.log(temperature);
+        console.log(this.state.nextTwoDayTemp);
+        console.log(nextTwoDayTemp);
 
         return (
             <div className="container">
@@ -147,7 +148,7 @@ class WeatherApp extends React.Component {
                 <p>"this is body"</p>
                 <TodayTemperature
                 city = {this.state.city}
-                temperature = {this.state.temperature}
+                temperature = {temperature}
                 humidity = {this.state.humidity}
                 icon = {this.state.icon}
                 description = {this.state.description}
@@ -155,9 +156,9 @@ class WeatherApp extends React.Component {
                 <NextThreeDaysTemperature
                 city = {this.state.city}
                 country = {this.state.country}
-                nextOneDayTemp = {this.state.nextOneDayTemp}
-                nextTwoDayTemp = {this.state.nextTwoDayTemp}
-                nextThreeDayTemp = {this.state.nextThreeDayTemp}
+                nextOneDayTemp = {nextOneDayTemp}
+                nextTwoDayTemp = {nextTwoDayTemp}
+                nextThreeDayTemp = {nextThreeDayTemp}
                 nextOneDay = {nextOneDay}
                 nextTwoDay = {nextTwoDay}
                 nextThreeDay = {nextThreeDay}
@@ -203,3 +204,11 @@ function getDate(){
             console.log(todayDate, nextOneDay, nextTwoDay, nextThreeDay);
             return {todayDate: todayDate, nextOneDay: nextOneDay, nextTwoDay: nextTwoDay, nextThreeDay: nextThreeDay}   
         }
+
+function convertTemp(temp) {
+    let convertTempT;
+    if(temp){
+    	convertTempT = temp - 273.15;
+        return Math.round(convertTempT)  
+    };
+}        
