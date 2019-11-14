@@ -88,11 +88,6 @@ class WeatherApp extends React.Component {
                 maximumAge: 60 * 1000 * 2
             }
         );
-
-
-
-
-
     }
 
     getWeather = async (e) => {
@@ -133,42 +128,58 @@ class WeatherApp extends React.Component {
         console.log(nextTwoDayTemp);
 
         return (
-            <div className="container">
-                <div className="header">
-                    <CurrentLocation
-                        lat = {this.state.lat}
-                        long = {this.state.long}
-                        city = {this.state.city}
-                        />
-                    <SearchBar
-                     getweather = {this.getWeather}
-                    />
-                </div>
-            <div className="body">
-                <p>"this is body"</p>
-                <TodayTemperature
-                city = {this.state.city}
-                temperature = {temperature}
-                humidity = {this.state.humidity}
-                icon = {this.state.icon}
-                description = {this.state.description}
-                />
-                <NextThreeDaysTemperature
-                city = {this.state.city}
-                country = {this.state.country}
-                nextOneDayTemp = {nextOneDayTemp}
-                nextTwoDayTemp = {nextTwoDayTemp}
-                nextThreeDayTemp = {nextThreeDayTemp}
-                nextOneDay = {nextOneDay}
-                nextTwoDay = {nextTwoDay}
-                nextThreeDay = {nextThreeDay}
-                icon1 = {this.state.icon1}
-                icon2 = {this.state.icon2}
-                icon3 = {this.state.icon3}
-                 />
-                }
-            </div>
-            </div>
+         	<div className="bg-image page-view">
+	          <div className="container" >
+	            <div className="header"> 
+	              <div className="row">
+	                <div className="col-12">
+	                  <h2>Weather forecast</h2>
+	                </div>
+	                <div className="col-12">
+	                  <SearchBar
+	                    getweather = {this.getWeather}
+	                    testList={["US","CN","JP","CA"]}
+	                  />
+	                </div>
+	              </div>
+	            </div>
+
+	                              
+	  
+
+	                <div className="header">
+	                    <CurrentLocation
+	                        lat = {this.state.lat}
+	                        long = {this.state.long}
+	                        city = {this.state.city}
+	                        />
+	                    
+	                </div>
+	            <div className="body">
+	                <p>"this is body"</p>
+	                <TodayTemperature
+	                city = {this.state.city}
+	                temperature = {temperature}
+	                humidity = {this.state.humidity}
+	                icon = {this.state.icon}
+	                description = {this.state.description}
+	                />
+	                <NextThreeDaysTemperature
+	                city = {this.state.city}
+	                country = {this.state.country}
+	                nextOneDayTemp = {nextOneDayTemp}
+	                nextTwoDayTemp = {nextTwoDayTemp}
+	                nextThreeDayTemp = {nextThreeDayTemp}
+	                nextOneDay = {nextOneDay}
+	                nextTwoDay = {nextTwoDay}
+	                nextThreeDay = {nextThreeDay}
+	                icon1 = {this.state.icon1}
+	                icon2 = {this.state.icon2}
+	                icon3 = {this.state.icon3}
+	                 />	                
+	            </div>
+	          </div>
+	        </div>  
         )
     }
 }
