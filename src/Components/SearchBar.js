@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './SearchBar.css';
+import { CityListUpdate } from '../constants';
 
 class SearchBar extends Component {
   
@@ -24,11 +25,10 @@ class SearchBar extends Component {
   }
 
   onChange(e) {
-    const { testList } = this.props;
     const userInput = e.currentTarget.value;
 
     //Fiter suggestions that don't contain the user's input
-    const filteredSuggestions = testList.filter(
+    const filteredSuggestions = CityListUpdate.filter(
       item => 
         item.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
@@ -111,7 +111,7 @@ class SearchBar extends Component {
     if(showSuggestions && userInput) {
       if(filteredSuggestions.length) {
         suggestionsListComponent = (
-          <ul class="suggestions">
+          <ul className="suggestions">
             {filteredSuggestions.map((suggestion, index) =>{
               //active suggestion style
               let className;
@@ -154,7 +154,6 @@ class SearchBar extends Component {
               value={userInput} 
             />
             {suggestionsListComponent}
-            <input type="text" placeholder="Country" name="country"/>
             <button > Search </button>
         </form>
         </div>

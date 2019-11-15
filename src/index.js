@@ -5,7 +5,7 @@ import CurrentLocation from './Components/CurrentLocation';
 import SearchBar from './Components/SearchBar';
 import NextThreeDaysTemperature from './Components/NextThreeDaysTemperature';
 import TodayTemperature from './Components/TodayTemperature';
-
+import SplineChart from './Components/SplineChart';
 
 
 const API_KEY = "9b8ba16944f1b9eafdf4b5e434c3511a";
@@ -15,6 +15,7 @@ class WeatherApp extends React.Component {
     constructor(props){
         super (props);
         this.state = {
+            data: null,
                 lat: 'Loading',
                 long: 'Loading',
                 temperature: "",
@@ -53,6 +54,7 @@ class WeatherApp extends React.Component {
                    .then(response => response.json())
                     .then(data =>
                         this.setState({
+                            data: data,
                             city: data.city.name,
                             temperature: data.list[1].main.temp,
                             country: data.city.country,
@@ -68,12 +70,7 @@ class WeatherApp extends React.Component {
                             icon3:data.list[24].weather[0].icon,    
                             error:""
                         })
-                    );
-
-
-                
-                //console.log(url);
-               
+                    );               
             }.bind(this),
             function (error) {
                 const errorTypes = {
@@ -92,24 +89,37 @@ class WeatherApp extends React.Component {
 
     getWeather = async (e) => {
         e.preventDefault();
-        const city = e.target.elements.city.value;
-        const country = e.target.elements.country.value;
+        // const city = e.target.elements.city.value;
+        // const country = e.target.elements.country.value;
         //const lat = this.state.lat;
         //const long = this.state.long;
-        const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=${API_KEY}`);
+        
+        //store city and country
+        const cityCombinedCountry = e.target.city.value;
+        const combinedArr = cityCombinedCountry.split(",");
+        const city = combinedArr[0];
+        const country = combinedArr[1];
+
+
+        const api_call = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=${API_KEY}`);
         const data = await api_call.json();
         if(city && country) {
-        	console.log(data);
         this.setState({
-            lat: data.coord.lat,
-            long: data.coord.lon,
-            temperature: data.main.temp,
-            city: data.name,
-            country: data.sys.country,
-            humidity: data.main.humidity,
-            icon: data.weather[0].icon,
-            description: data.weather[0].description,
-            error:""
+            data: data,
+                            city: data.city.name,
+                            temperature: data.list[1].main.temp,
+                            country: data.city.country,
+                            humidity: data.list[1].main.humidity,
+                            description: data.list[1].weather[0].description,
+                            icon: data.list[1].weather[0].icon,
+                            nextOneDayTemp: data.list[8].main.temp,
+                            //nextDay: [data.list],
+                            nextTwoDayTemp: data.list[16].main.temp,
+                            nextThreeDayTemp: data.list[24].main.temp,
+                            icon1:data.list[8].weather[0].icon,
+                            icon2:data.list[16].weather[0].icon,
+                            icon3:data.list[24].weather[0].icon,    
+                            error:""
         })
         }
     }
@@ -125,8 +135,8 @@ class WeatherApp extends React.Component {
         
         console.log(temperature);
         console.log(this.state.nextTwoDayTemp);
-        console.log(nextTwoDayTemp);
-
+        console.log(this.state.data);
+        
         return (
          	<div className="bg-image page-view">
 	          <div className="container" >
@@ -138,16 +148,11 @@ class WeatherApp extends React.Component {
 	                <div className="col-12">
 	                  <SearchBar
 	                    getweather = {this.getWeather}
-	                    testList={["US","CN","JP","CA"]}
 	                  />
 	                </div>
 	              </div>
 	            </div>
-
-	                              
-	  
-
-	                <div className="header">
+	                <div>
 	                    <CurrentLocation
 	                        lat = {this.state.lat}
 	                        long = {this.state.long}
@@ -156,6 +161,7 @@ class WeatherApp extends React.Component {
 	                    
 	                </div>
 	            <div className="body">
+                  <div>
 	                <p>"this is body"</p>
 	                <TodayTemperature
 	                city = {this.state.city}
@@ -176,7 +182,9 @@ class WeatherApp extends React.Component {
 	                icon1 = {this.state.icon1}
 	                icon2 = {this.state.icon2}
 	                icon3 = {this.state.icon3}
-	                 />	                
+	                 />
+                  </div>
+                  <SplineChart />
 	            </div>
 	          </div>
 	        </div>  
