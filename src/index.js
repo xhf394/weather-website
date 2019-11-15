@@ -15,7 +15,7 @@ class WeatherApp extends React.Component {
     constructor(props){
         super (props);
         this.state = {
-            data: null,
+                data: null,
                 lat: 'Loading',
                 long: 'Loading',
                 temperature: "",
@@ -105,7 +105,7 @@ class WeatherApp extends React.Component {
         const data = await api_call.json();
         if(city && country) {
         this.setState({
-            data: data,
+                            data: data,
                             city: data.city.name,
                             temperature: data.list[1].main.temp,
                             country: data.city.country,
@@ -137,6 +137,14 @@ class WeatherApp extends React.Component {
         console.log(this.state.nextTwoDayTemp);
         console.log(this.state.data);
         
+        const { data } = this.state;
+        
+        const forecastList = (
+          data&&data.list
+        ) || [];
+
+        console.log(forecastList);
+
         return (
          	<div className="bg-image page-view">
 	          <div className="container" >
@@ -184,7 +192,10 @@ class WeatherApp extends React.Component {
 	                icon3 = {this.state.icon3}
 	                 />
                   </div>
-                  <SplineChart />
+                  <SplineChart
+                    forecastList={forecastList}
+                    city = {this.state.city}
+                  />
 	            </div>
 	          </div>
 	        </div>  
