@@ -5,23 +5,32 @@ import ReactDOM from 'react-dom';
 class TodayTemperature extends React.Component {
 
     render () {
+       
+      const { 
+        icon, 
+        city, 
+        temperature,
+        humidity,
+        description,
+      } = this.props; 
 
-        const iconcode = this.props.icon;
-        const iconurl = "http://openweathermap.org/img/w/"+ iconcode +".png";
-
-        console.log(iconurl);
+      const iconurl = "http://openweathermap.org/img/w/"+ icon +".png";
 
         return (
-            <div>
-            "today's temperature " <br/>
-            <div id="icon">
+          <div className="row">
+            <div className="col-12">
+              <h5> Weather in <em>{city} </em> </h5>  
+            </div>
+
+            <div id="icon" className="col-12">
                 <img id="wicon" src={iconurl} alt="Weather icon" />
+                <span>{`${temperature} °C`}</span>
             </div>
-             icon: {this.props.icon}<br />
-             temperature: {this.props.temperature}<br />
-             humidity: {this.props.humidity}<br />
-             description: {this.props.description}
-            </div>
+            <div className="col-12">
+              humidity: {humidity}<br />
+             description: {description}
+             </div>
+          </div>
         )
     }
 }

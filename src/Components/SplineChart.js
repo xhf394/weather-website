@@ -48,13 +48,13 @@ class SplineChart extends Component {
 			}]
 		}
 		
-		console.log(options.data[0]);
 		return (
 		  <div>
             {forecastList&&
              dataList&&
+             city&&
 		     <div>
-			   <h1>React Spline Chart</h1>
+		       <div></div>
 			   <CanvasJSChart options = {options} 
 				/* onRef={ref => this.chart = ref} */
 			   />

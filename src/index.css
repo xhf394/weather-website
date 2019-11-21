@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  font-family: -apple-system, "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -16,20 +16,126 @@ code {
 /*======================================
 //--//-->   STYLES GENERALES
 ======================================*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #505050;
+}
+
+
+
+
 .bg-image {
   /*background-image: url("https://i.imgur.com/eQOTYLm.jpg");*/
-  background-image: url('https://i.imgur.com/IIKBPxc.jpg'); 
+  background-image: url('https://i.imgur.com/t2KwTJk.jpg'); 
 }
 
 .bg-image {
   background-repeat: repeat;
-  background-size: contain;
+  background-size: auto;
   /*background-attachment: fixed;*/
   
+}
+
+.bg-pb {
+  padding-bottom: 100px;
 }
 
 .page-view {
   height: 100vh;
   position: relative;
+}
 
+.p-r {
+  position: relative;
+}
+
+.p-a {
+  position: absolute;
+}
+
+/*--/ Sections /--*/
+
+.sect-2 {
+  padding: 2rem 0;
+}
+
+.sect-pt2 {
+  padding-top: 2rem;
+}
+
+.sect-pb2 {
+  padding-bottom: 2rem;
+}
+
+.sect-mt2 {
+  margin-top: 2rem;
+}
+
+
+
+/*======================================
+//--//-->   INTRO
+======================================*/
+.intro {
+  position: relative;
+}
+
+.intro .intro-title {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #505050;
+}
+
+.overlay-intro {
+ min-height: 60px;
+}
+
+.intro-mf {
+  height: 90px;
+}
+
+
+
+
+
+
+
+
+
+
+/*======================================
+//--//-->   CURRENT
+======================================*/
+
+.z-index-5 {
+  z-index: 5;
+}
+
+.z-index-1 {
+  z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+/*======================================
+//--//-->   FORECAST
+======================================*/
+
+.box-shadow-full {
+  padding: 1.25rem 0.5rem;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 1.5rem;
+  /*z-index: 2*/
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.2);
 }

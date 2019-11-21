@@ -37,12 +37,23 @@ class SearchBar extends Component {
     //filter suggestions
     //reset active suggestion index
     //make sure suggestions are shown
+
+    if(userInput == "") {
+      this.setState({
+        activeSuggestion: 0,
+        showSuggestions: false,
+        filteredSuggestions,
+        userInput: "",
+      });
+    }
+    else {
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions,
       showSuggestions: true,
       userInput: e.currentTarget.value,	
     })
+    }
   }
 
 
@@ -107,22 +118,24 @@ class SearchBar extends Component {
     } = this.state;
     
     let suggestionsListComponent;
+    
+    const autoFillSpaceStyle = ['p-r', 'intro-mf'];
 
     if(showSuggestions && userInput) {
       if(filteredSuggestions.length) {
         suggestionsListComponent = (
-          <ul className="suggestions">
+          <ul className="list-group list-group-autofill overflow-auto">
             {filteredSuggestions.map((suggestion, index) =>{
               //active suggestion style
-              let className;
+              let className=['list-group-item', 'list-group-item-autofill'];
 
               if(activeSuggestion === index) {
-                className="suggestion-active";
+                className.push('list-group-item-warning');
               }
-
+              
               return(
                 <li
-                  className={className}
+                  className={className.join(' ')}
                   key={suggestion}
                   onClick={this.onClick}
                 >
@@ -142,21 +155,36 @@ class SearchBar extends Component {
       }	
     }
 
+    if( showSuggestions ) {
+      autoFillSpaceStyle.push('d-none');
+    }
+
     return (
-        <div>
-        <form onSubmit={this.props.getweather}>
-            <input
-              type="text" 
-              placeholder="City" 
-              name="city"
-              onChange={this.onChange}
-              onKeyDown={this.onKeyDown}
-              value={userInput} 
-            />
-            {suggestionsListComponent}
-            <button > Search </button>
-        </form>
-        </div>
+          <div className="row justify-content-center">
+            <form onSubmit={this.props.getweather} className="col-10">
+              <div className="row justify-content-center">
+                <input
+                type="text" 
+                placeholder="City" 
+                name="city"
+                onChange={this.onChange}
+                onKeyDown={this.onKeyDown}
+                value={userInput} 
+                className="col-8"
+                />
+                <button className="col-3 btn btn-secondary "> Search </button>
+              </div>           
+            </form>
+            <div className="col-10">
+              <div className="p-r">
+                {suggestionsListComponent} 
+              </div>
+              <div className={autoFillSpaceStyle.join(' ')}>dd</div>
+            </div>
+            
+          </div>
+
+        
     )
    }
 }

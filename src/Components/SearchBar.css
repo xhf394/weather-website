@@ -1,12 +1,51 @@
+
+
 input {
   border: 1px solid #999;
+  border-radius: .25rem;
   padding: 0.5rem;
   width:300px;
 }
 
+
+
+
+/*======================================
+//--//-->   SEARCH BUTTON
+======================================*/
+.search-flex {
+  display: flex;
+}
+
+
+
+/*======================================
+//--//-->   SEARCH BUTTON
+======================================*/
+
+
+
+/*======================================
+//--//-->   AUTO FILL COMPLETION
+======================================*/
+.list-group-item-autofill {
+  padding: .3rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.list-group-autofill {
+  height: 90px;
+}
+
+
+
 .no-suggestions {
   color: #999;
   padding: 0.5rem;
+  height: 80px;
+  margin-bottom: 1rem;
 }
 
 .suggestions {
@@ -14,14 +53,16 @@ input {
   border-top-width: 0;
   list-style: none;
   margin-top: 0;
-  max-height: 143px;
+  height: 80px;
   overflow-y: auto;
   padding-left: 0;
-  width: calc(300px + 1rem);
 }
 
-.suggestions li {
-  padding: 0.5rem;
+.suggestions > li {
+  padding: 0.2rem;
+  font-weight: 300;
+  line-height: 1rem;
+  font-size: 0.8rem;
 }
 
 .suggestion-active,
@@ -29,9 +70,12 @@ input {
   background-color: #008f68;
   color: #fae042;
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 300;
+  line-height: 1rem;
+  font-size: 0.8rem;
 }
 
 .suggestions li:not(:last-of-type) {
   border-bottom: 1px solid #999;
 }
+

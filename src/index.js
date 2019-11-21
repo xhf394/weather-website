@@ -19,19 +19,19 @@ class WeatherApp extends React.Component {
                 lat: 'Loading',
                 long: 'Loading',
                 temperature: "",
-                city: "undefined",
-                country: undefined,
-                humidity: undefined,
-                description: undefined,
-                icon: undefined,
-                error: undefined,
-                forcastweather: undefined,
+                city: null,
+                country: null,
+                humidity: null,
+                description: null,
+                icon: null,
+                error: null,
+                forcastweather: null,
                 nextOneDayTemp: null,
                 nextTwoDayTemp: null,
                 nextThreeDayTemp: null,
-                icon1: undefined,
-                icon2: undefined,
-                icon3:undefined,
+                icon1: null,
+                icon2: null,
+                icon3: null,
                 // nextDay: [
                 //         {nextDay: undefined}
                 // ]
@@ -137,7 +137,7 @@ class WeatherApp extends React.Component {
         console.log(this.state.nextTwoDayTemp);
         console.log(this.state.data);
         
-        const { data } = this.state;
+        const { data, city, icon } = this.state;
         
         const forecastList = (
           data&&data.list
@@ -146,57 +146,72 @@ class WeatherApp extends React.Component {
         console.log(forecastList);
 
         return (
-         	<div className="bg-image page-view">
+         	<div className="bg-image bg-pb">         
 	          <div className="container" >
-	            <div className="header"> 
-	              <div className="row">
-	                <div className="col-12">
-	                  <h2>Weather forecast</h2>
-	                </div>
-	                <div className="col-12">
-	                  <SearchBar
-	                    getweather = {this.getWeather}
-	                  />
+	            <div className="row">
+
+
+
+                  <div className="col-12">
+                    <div className="overlay-intro"></div>  
+	                <div className="row">
+	                  <div className="col-12">
+	                    <h2 className="intro-title">Weather forecast</h2>
+	                  </div>
+	                  <div className="col-12 sect-mt2">
+	                    <SearchBar
+	                      getweather = {this.getWeather}
+	                    />
+	                  </div>
+                      
 	                </div>
 	              </div>
-	            </div>
-	                <div>
-	                    <CurrentLocation
-	                        lat = {this.state.lat}
-	                        long = {this.state.long}
-	                        city = {this.state.city}
-	                        />
-	                    
-	                </div>
-	            <div className="body">
-                  <div>
-	                <p>"this is body"</p>
-	                <TodayTemperature
-	                city = {this.state.city}
-	                temperature = {temperature}
-	                humidity = {this.state.humidity}
-	                icon = {this.state.icon}
-	                description = {this.state.description}
-	                />
-	                <NextThreeDaysTemperature
-	                city = {this.state.city}
-	                country = {this.state.country}
-	                nextOneDayTemp = {nextOneDayTemp}
-	                nextTwoDayTemp = {nextTwoDayTemp}
-	                nextThreeDayTemp = {nextThreeDayTemp}
-	                nextOneDay = {nextOneDay}
-	                nextTwoDay = {nextTwoDay}
-	                nextThreeDay = {nextThreeDay}
-	                icon1 = {this.state.icon1}
-	                icon2 = {this.state.icon2}
-	                icon3 = {this.state.icon3}
-	                 />
+
+
+
+                  <div className="col-12"> 
+                    <TodayTemperature
+                    city = {city}
+                    temperature = {temperature}
+                    humidity = {this.state.humidity}
+                    icon = {icon}
+                    description = {this.state.description}
+                    />
                   </div>
-                  <SplineChart
-                    forecastList={forecastList}
-                    city = {this.state.city}
-                  />
-	            </div>
+
+
+
+
+                  <div className="col-12 sect-mt2">
+                    <div className="row">
+                      <div className="col-12 sect-pt2 sect-pb2">
+                        <NextThreeDaysTemperature
+                          city = {this.state.city}
+                          country = {this.state.country}
+                          nextOneDayTemp = {nextOneDayTemp}
+                          nextTwoDayTemp = {nextTwoDayTemp}
+                          nextThreeDayTemp = {nextThreeDayTemp}
+                          nextOneDay = {nextOneDay}
+                          nextTwoDay = {nextTwoDay}
+                          nextThreeDay = {nextThreeDay}
+                          icon1 = {this.state.icon1}
+                          icon2 = {this.state.icon2}
+                          icon3 = {this.state.icon3}
+                        /> 
+                      </div>
+                      <div className="col-12">
+                        <SplineChart
+                          forecastList={forecastList}
+                          city = {this.state.city}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                </div>
 	          </div>
 	        </div>  
         )
