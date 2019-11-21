@@ -128,16 +128,20 @@ class WeatherApp extends React.Component {
         const nextOneDay = getDate().nextOneDay;
         const nextTwoDay = getDate().nextTwoDay;
         const nextThreeDay = getDate().nextThreeDay;
-        let temperature = convertTemp(this.state.temperature);
-        let nextOneDayTemp = convertTemp(this.state.nextOneDayTemp);
-        let nextTwoDayTemp = convertTemp(this.state.nextTwoDayTemp);
-        let nextThreeDayTemp = convertTemp(this.state.nextThreeDayTemp);   
+        let temperature = convertTemp(this.state.temperature) || "";
+        let nextOneDayTemp = convertTemp(this.state.nextOneDayTemp) || "";
+        let nextTwoDayTemp = convertTemp(this.state.nextTwoDayTemp) || "";
+        let nextThreeDayTemp = convertTemp(this.state.nextThreeDayTemp) || "";   
         
         console.log(temperature);
         console.log(this.state.nextTwoDayTemp);
         console.log(this.state.data);
         
-        const { data, city, icon } = this.state;
+        const { 
+          data, 
+          city, 
+          icon,
+        } = this.state;
         
         const forecastList = (
           data&&data.list
@@ -158,7 +162,7 @@ class WeatherApp extends React.Component {
 	                  <div className="col-12">
 	                    <h2 className="intro-title">Weather forecast</h2>
 	                  </div>
-	                  <div className="col-12 sect-mt2">
+	                  <div className="col-12 sect-mt1">
 	                    <SearchBar
 	                      getweather = {this.getWeather}
 	                    />
@@ -182,9 +186,9 @@ class WeatherApp extends React.Component {
 
 
 
-                  <div className="col-12 sect-mt2">
+                  <div className="col-12 sect-mt1">
                     <div className="row">
-                      <div className="col-12 sect-pt2 sect-pb2">
+                      <div className="col-12 sect-pt1 sect-pb1">
                         <NextThreeDaysTemperature
                           city = {this.state.city}
                           country = {this.state.country}

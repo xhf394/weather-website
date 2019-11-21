@@ -18,18 +18,22 @@ class TodayTemperature extends React.Component {
 
         return (
           <div className="row">
-            <div className="col-12">
-              <h5> Weather in <em>{city} </em> </h5>  
+            <div className="col-12"> 
+              <div className="card border-warning">
+                <div className="card-header">
+                  <h5> Weather in <em>{city} </em> <img id="wicon" src={iconurl} alt="..." /> </h5>  
+                </div>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item">{`Temperature: ${temperature} °C`}  </li>
+                  <li className="list-group-item"> Humidity: {humidity} % </li>
+                  <li className="list-group-item d-none"> Description: {description} </li>
+                </ul>
+              </div>
             </div>
 
-            <div id="icon" className="col-12">
-                <img id="wicon" src={iconurl} alt="Weather icon" />
-                <span>{`${temperature} °C`}</span>
-            </div>
-            <div className="col-12">
-              humidity: {humidity}<br />
-             description: {description}
-             </div>
+
+
+
           </div>
         )
     }

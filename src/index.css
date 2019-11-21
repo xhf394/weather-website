@@ -59,20 +59,20 @@ h6 {
 
 /*--/ Sections /--*/
 
-.sect-2 {
-  padding: 2rem 0;
+.sect-1 {
+  padding: 1rem 0;
 }
 
-.sect-pt2 {
-  padding-top: 2rem;
+.sect-pt1 {
+  padding-top: 1rem;
 }
 
-.sect-pb2 {
-  padding-bottom: 2rem;
+.sect-pb1 {
+  padding-bottom: 1rem;
 }
 
-.sect-mt2 {
-  margin-top: 2rem;
+.sect-mt1 {
+  margin-top: 1rem;
 }
 
 

@@ -26,29 +26,34 @@ class NextThreeDaysTemperature extends  React.Component {
           <div className="row">
             <div className="col-12"> <h5>Weather in the Next Three Days</h5> </div>
 			<div className="col-4 ">
-              <div className="row justify-content-center ">
-                <div className="col-10"> {nextOneDay} </div>
-                <div className="col-10"><img id="wicon" src={iconurl1} alt="Weather icon" /></div>
-                <div className="col-8">{`${nextOneDayTemp}°C`}</div>
+              <div className="card text-center">
+                <div className="row justify-content-center ">
+                  <div className="col-10"> {nextOneDay} </div>
+                  <div className="col-10"><img id="wicon" src={iconurl1} alt="..." /></div>
+                  <div className="col-8">{`${nextOneDayTemp}°C`}</div>
+                </div>
               </div>
-            </div>  
-                 
+            </div>                
             <div className="col-4">
-              <div className="row justify-content-center">
-                <div className="col-10"> {nextTwoDay} </div>
-                <div className="col-10"><img id="wicon" src={iconurl2} alt="Weather icon" /></div>
-                <div className="col-8">{`${nextTwoDayTemp}°C`}</div>
-              </div>                   
+              <div className="card text-center">
+                <div className="row justify-content-center">
+                  <div className="col-10"> {nextTwoDay} </div>
+                  <div className="col-10"><img id="wicon" src={iconurl2} alt="..." /></div>
+                  <div className="col-8">{`${nextTwoDayTemp}°C`}</div>
+                </div> 
+              </div>                               
             </div>
             <div className="col-4">
-              <div className="row justify-content-center">
-                <div className="col-10"> {nextThreeDay} </div>
-                <div className="col-10"><img id="wicon" src={iconurl3} alt="Weather icon" /></div>
-                <div className="col-8">{`${nextThreeDayTemp}°C`}</div>
-              </div>             
+              <div class="card text-center">
+                <div className="row justify-content-center">
+                  <div className="col-10"> {nextThreeDay} </div>
+                  <div className="col-10"><img id="wicon" src={iconurl3} alt="..." /></div>
+                  <div className="col-8">{`${nextThreeDayTemp}°C`}</div>
+                </div> 
+              </div>                          
             </div>  
           </div>
-    )
+        )
     }
 }
 
