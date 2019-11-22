@@ -153,16 +153,13 @@ class WeatherApp extends React.Component {
          	<div className="bg-image bg-pb">         
 	          <div className="container" >
 	            <div className="row">
-
-
-
                   <div className="col-12">
                     <div className="overlay-intro"></div>  
-	                <div className="row">
+	                <div className="row justify-content-center">
 	                  <div className="col-12">
 	                    <h2 className="intro-title">Weather forecast</h2>
 	                  </div>
-	                  <div className="col-12 sect-mt1">
+	                  <div className="col-12 col-sm-10 sect-mt1">
 	                    <SearchBar
 	                      getweather = {this.getWeather}
 	                    />
@@ -173,7 +170,7 @@ class WeatherApp extends React.Component {
 
 
 
-                  <div className="col-12"> 
+                  <div className="col-12 col-sm-8 col-md-6"> 
                     <TodayTemperature
                     city = {city}
                     temperature = {temperature}
@@ -188,7 +185,7 @@ class WeatherApp extends React.Component {
 
                   <div className="col-12 sect-mt1">
                     <div className="row">
-                      <div className="col-12 sect-pt1 sect-pb1">
+                      <div className="col-12 col-sm-6 sect-pt1 sect-pb1">
                         <NextThreeDaysTemperature
                           city = {this.state.city}
                           country = {this.state.country}
@@ -203,7 +200,7 @@ class WeatherApp extends React.Component {
                           icon3 = {this.state.icon3}
                         /> 
                       </div>
-                      <div className="col-12">
+                      <div className="col-12 col-sm-6">
                         <SplineChart
                           forecastList={forecastList}
                           city = {this.state.city}

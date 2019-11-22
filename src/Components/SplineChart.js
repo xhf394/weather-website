@@ -53,8 +53,7 @@ class SplineChart extends Component {
             {forecastList&&
              dataList&&
              city&&
-		     <div>
-		       <div></div>
+		     <div className="mt-3 chart-box">
 			   <CanvasJSChart options = {options} 
 				/* onRef={ref => this.chart = ref} */
 			   />

@@ -24,31 +24,31 @@ class NextThreeDaysTemperature extends  React.Component {
 
         return (            
           <div className="row">
-            <div className="col-12"> <h5>Weather in the Next Three Days</h5> </div>
-			<div className="col-4 ">
-              <div className="card text-center">
-                <div className="row justify-content-center ">
-                  <div className="col-10"> {nextOneDay} </div>
-                  <div className="col-10"><img id="wicon" src={iconurl1} alt="..." /></div>
-                  <div className="col-8">{`${nextOneDayTemp}°C`}</div>
+            <div className="col-12 mb-3 text-center"> <h5>Weather in the Next Three to Five Days</h5> </div>
+			<div className="col-4 col-sm-12">
+              <div className="card text-center border-primary forecast-item-box">
+                <div className="row justify-content-center forecast-item-fsize">
+                  <div className="col-10 col-sm-5 align-self-center"> {nextOneDay} </div>
+                  <div className="col-10 col-sm-4"><img id="wicon" src={iconurl1} alt="..." /></div>
+                  <div className="col-8 col-sm-3 align-self-center">{`${nextOneDayTemp}°C`}</div>
                 </div>
               </div>
             </div>                
-            <div className="col-4">
-              <div className="card text-center">
-                <div className="row justify-content-center">
-                  <div className="col-10"> {nextTwoDay} </div>
-                  <div className="col-10"><img id="wicon" src={iconurl2} alt="..." /></div>
-                  <div className="col-8">{`${nextTwoDayTemp}°C`}</div>
+            <div className="col-4 col-sm-12">
+              <div className="card text-center border-primary forecast-item-box">
+                <div className="row justify-content-center forecast-item-fsize">
+                  <div className="col-10 col-sm-5 align-self-center"> {nextTwoDay} </div>
+                  <div className="col-10 col-sm-4"><img id="wicon" src={iconurl2} alt="..." /></div>
+                  <div className="col-8 col-sm-3 align-self-center">{`${nextTwoDayTemp}°C`}</div>
                 </div> 
               </div>                               
             </div>
-            <div className="col-4">
-              <div class="card text-center">
-                <div className="row justify-content-center">
-                  <div className="col-10"> {nextThreeDay} </div>
-                  <div className="col-10"><img id="wicon" src={iconurl3} alt="..." /></div>
-                  <div className="col-8">{`${nextThreeDayTemp}°C`}</div>
+            <div className="col-4 col-sm-12">
+              <div class="card text-center border-primary forecast-item-box">
+                <div className="row justify-content-center forecast-item-fsize">
+                  <div className="col-10 col-sm-5 align-self-center"> {nextThreeDay} </div>
+                  <div className="col-10 col-sm-4"><img id="wicon" src={iconurl3} alt="..." /></div>
+                  <div className="col-8 col-sm-3 align-self-center">{`${nextThreeDayTemp}°C`}</div>
                 </div> 
               </div>                          
             </div>  

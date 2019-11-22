@@ -170,16 +170,16 @@ class SearchBar extends Component {
                 onChange={this.onChange}
                 onKeyDown={this.onKeyDown}
                 value={userInput} 
-                className="col-8"
+                className="col-8 col-lg-9"
                 />
-                <button className="col-3 btn btn-secondary "> Search </button>
+                <button className="col-3 col-lg-2 btn btn-secondary "> Search </button>
               </div>           
             </form>
             <div className="col-10">
               <div className="p-r">
                 {suggestionsListComponent} 
               </div>
-              <div className={autoFillSpaceStyle.join(' ')}>dd</div>
+              <div className={autoFillSpaceStyle.join(' ')}></div>
             </div>
             
           </div>
